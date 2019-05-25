@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card green lighten-3">
+      <div class="card-content white-text">
+        <div class="row">
+          <div class="col m3 center-align">
+            {% if post.user.userprofile.profile_image %}
+              <img src="{{post.user.userprofile.profile_image.url}}" class="postImg">
+            {% else %}
+              <img src="/media/default.png" class="postImg">
+            {% endif %}
+          </div>
+          <a href="{{post.user.username}}" class="card-title white-text col m6 center-align">{{post.user.username}}</a>
+        </div>
+        <p>{{post.message}}</p><br>
+
+          <div class="card-action">
+            {% if post.user == user %}
+            <a href="/delete/{{post.id}}" class="green-text" style="margin: 0px">Delete</a>
+            {% elif post.user.userprofile not in request.user.userprofile.follows.all %}
+            <a href="/follow/{{post.user.userprofile.id}}" class="green-text" style="margin: 0px;">Follow</a>
+            {% else %}
+            <a href="/unfollow/{{post.user.userprofile.id}}" class="green-text" style="margin: 0px;">Unfollow</a>
+            {% endif %}
+          </div>
+
+      </div>
+    </div> 
+  </div>  
+</div>

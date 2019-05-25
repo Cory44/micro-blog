@@ -1,0 +1,34 @@
+{% extends 'micro/header.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col l4 m8 offset-m2 s12 center-align">
+      <h3>{{username}}</h3><br>
+
+      {% if user.userprofile.profile_image %}
+        <img src="{{user.userprofile.profile_image.url}}" class="profileImg"><br>
+      {% elif username == request.user.username  %}
+        {% include 'micro/includes/image_form.html' %} 
+      {% else %}
+        <img src="/media/default.png" class="profileImg">
+      {% endif %}
+
+      {% if username == request.user.username %}
+        {% include 'micro/includes/post-form.html' %}
+      {% endif %}
+    </div>
+    <div class="col l7 offset-l1 m8 offset-m2 s12 center-align">
+
+      {% if username == user.username %}
+      <h3>My Posts</h3><br>
+      {% else %}
+        <h3>{{username}}'s posts</h3><br>
+      {% endif %}
+
+      {% for post in userposts %}
+        {% include 'micro/includes/feed.html' %}
+      {% endfor %}
+
+    </div>
+  </div>
+{% endblock %}

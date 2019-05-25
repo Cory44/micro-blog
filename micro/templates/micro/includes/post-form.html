@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card white">
+      <div class="card-content black-text">
+        <span class="card-title">Post a Message!</span>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="input-field col s12">
+            {{form.as_p}}
+          </div>
+          <button class="btn waves-effect waves-light green lighten-2" type="submit" name="post">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<nav class="green lighten-3">
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo" style="padding-left: 15px;">Logo</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      {% if request.user.is_authenticated %}
+        <li><a href="{{request.user.username}}">{{request.user.username|title}}</a></li>
+        <li><a href="{% url 'micro:logout' %}">Logout</a></li>
+      {% else %}
+      <li><a href="{% url 'micro:login' %}">Login</a></li>
+      <li><a href="{% url 'micro:register' %}">Register</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

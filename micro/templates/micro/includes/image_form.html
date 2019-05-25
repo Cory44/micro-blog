@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card green lighten-4">
+      <div class="card-content black-text">
+        <span class="card-title">Upload a Profile Image</span>
+        <form method="POST", enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form2.as_p }}
+          <br>
+          <button class="btn waves-effect waves-light green lighten-2" type="submit" name="image">Submit</button>
+        </form> 
+      </div>
+    </div>
+  </div>
+</div>
