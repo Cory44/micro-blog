@@ -19,15 +19,22 @@
     </div>
     <div class="col l7 offset-l1 m8 offset-m2 s12 center-align">
 
-      {% if username == user.username %}
-      <h3>My Posts</h3><br>
+      {% if user == request.user %}
+        <h3>My Feed</h3><br>
+        {% for post in posts %}
+          {% if post.user.userprofile in follows or post.user == request.user %}
+            {% include 'micro/includes/feed.html' %}
+          {% endif %}
+        {% endfor %}
       {% else %}
         <h3>{{username}}'s posts</h3><br>
+        {% for post in posts %}
+          {% if post.user == user %}
+            {% include 'micro/includes/feed.html' %}
+          {% endif %}
+        {% endfor %}
       {% endif %}
 
-      {% for post in userposts %}
-        {% include 'micro/includes/feed.html' %}
-      {% endfor %}
 
     </div>
   </div>

@@ -4,30 +4,12 @@
 
   <div class="row">
 
-      {% if request.user.is_authenticated %}
-        <div class="col l4 m8 offset-m2 s12 center-align">
-          <h2>Welcome {{user.username}}!</h2>
-
-          {% include 'micro/includes/post-form.html' %}
-        </div>
-
-        <div class="col l7 offset-l1 m8 offset-m2 s12 center-align">
-          <h2>This is your feed</h2><br>
-          {% for post in posts %}
-            {% if post.user.userprofile in following %}
-              {% include 'micro/includes/feed.html' %}
-            {% endif %}
-          {% endfor %}
-        </div>
-
-      {% else %}
-        <div class="col m6 offset-m3 s12 center-align">
-          <h3>Welcome!</h3>
-          <a href="{% url 'micro:login' %}" class="col s4 offset-s1 waves-effect waves-light btn green lighten-2">Login</a>
-          <p class="col s2"><strong>or</strong></p>
-          <a href="{% url 'micro:register' %}" class="col s4 waves-effect waves-light btn green lighten-2">Register</a>
-        </div>
-      {% endif %}
+    <div class="col m6 offset-m3 s12 center-align">
+      <h3>Welcome!</h3>
+      <a href="{% url 'micro:login' %}" class="col s4 offset-s1 waves-effect waves-light btn green lighten-2">Login</a>
+      <p class="col s2"><strong>or</strong></p>
+      <a href="{% url 'micro:register' %}" class="col s4 waves-effect waves-light btn green lighten-2">Register</a>
+    </div>
 
     </div>
   </div>

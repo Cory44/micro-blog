@@ -16,22 +16,10 @@ from datetime import datetime
 #
 ############################################
 def homepage(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.published = datetime.now()
-            post.save()
-            return redirect('micro:homepage')
-        else:
-            messages.error(request, "Error!")
-    
-    form = PostForm()
     if request.user.is_authenticated:
-        return render(request, 'micro/home.html', {"posts":Post.objects.order_by('-published'), "form":form, "following":[following for following in request.user.userprofile.follows.all()]})
+        return redirect(f'/{request.user.username}')
     else:
-        return render(request, 'micro/home.html', {"posts":Post.objects.order_by('-published'), "form":form})
+        return render(request, 'micro/home.html')
 
 
 ###########################################
@@ -111,9 +99,10 @@ def profile(request, username):
                 profileForms(request)
             form = PostForm()
             form2 = ProfileImageForm()
-            userposts = Post.objects.filter(user__username=username).order_by('-published')
             user = User.objects.get(username=username)
-            return render(request, 'micro/profile.html', {"userposts":userposts, "username":username, "user":user, "form":form, "form2":form2})
+            follows = [follows for follows in request.user.userprofile.follows.all()]
+            posts = Post.objects.order_by('-published')
+            return render(request, 'micro/profile.html', {"follows":follows, "username":username, "user":user, "posts":posts, "form":form, "form2":form2})
         else:
             messages.error(request, "User does not exist")
             return redirect('micro:homepage')
