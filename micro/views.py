@@ -32,7 +32,9 @@ def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
             UserProfile.objects.create(user=user)
             username = form.cleaned_data.get('username')
             login(request, user)
@@ -69,7 +71,7 @@ def login_request(request):
     if request.method == "POST":
         form = CustomAuthForm(request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
+            username = form.cleaned_data.get('username').lower()
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
@@ -131,6 +133,12 @@ def profileForms(request):
             return redirect(f'/{request.user.username}')
         else:
             messages.error(request, "Error!")
+
+def discover(request):
+    if request.user.is_authenticated:
+        users = [user for user in User.objects.all() if user.userprofile not in request.user.userprofile.follows.all() and user != request.user]
+        return render(request, 'micro/discover.html', {"users":users})
+
 
 def delete(request, id):
     post = Post.objects.get(id=id).delete()

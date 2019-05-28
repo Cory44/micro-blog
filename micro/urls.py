@@ -28,4 +28,5 @@ urlpatterns = [
     path('delete/<id>', views.delete, name="delete"),
     path('unfollow/<id>', views.unfollow, name="unfollow"),
     path('follow/<id>', views.follow, name="follow"),
+    path('discover/', views.discover, name="discover"),
 ]

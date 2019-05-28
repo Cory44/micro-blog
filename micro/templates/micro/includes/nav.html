@@ -17,7 +17,8 @@
       </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         {% if request.user.is_authenticated %}
-          <li><a href="{{request.user.username}}">{{request.user.username|title}}</a></li>
+          <li><a href="{% url 'micro:discover' %}">Discover</a></li>
+          <li><a href="/{{request.user.username}}">{{request.user.username|title}}</a></li>
           <li><a href="{% url 'micro:logout' %}">Logout</a></li>
         {% else %}
           <li><a href="{% url 'micro:login' %}">Login</a></li>
@@ -30,6 +31,7 @@
 
 <ul class="green lighten-5 sidenav" id="mobile-demo">
   {% if request.user.is_authenticated %}
+    <li><a href="{% url 'micro:discover' %}">Discover</a></li>
     <li><a href="{{request.user.username}}">{{request.user.username|title}}</a></li>
     <li><a href="{% url 'micro:logout' %}">Logout</a></li>
   {% else %}

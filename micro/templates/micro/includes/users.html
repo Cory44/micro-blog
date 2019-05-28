@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card green lighten-3">
+      <div class="card-content white-text">
+        <div class="row">
+            <a href="{{user.username}}" class="card-title white-text col m12 center-align">{{user.username}}</a>
+
+          <div class="col m12 center-align">
+            {% if user.userprofile.profile_image %}
+              <img src="{{user.userprofile.profile_image.url}}" class="postImg">
+            {% else %}
+              <img src="https://micro-static.s3.amazonaws.com/media/default.png" class="postImg">
+            {% endif %}
+          </div>
+
+        </div>
+          <div class="card-action">
+            <a href="/follow/{{user.userprofile.id}}" class="green-text" style="margin: 0px;">Follow</a>
+          </div>
+      </div>
+    </div> 
+  </div>  
+</div>

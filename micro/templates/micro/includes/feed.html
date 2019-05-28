@@ -7,7 +7,7 @@
             {% if post.user.userprofile.profile_image %}
               <img src="{{post.user.userprofile.profile_image.url}}" class="postImg">
             {% else %}
-              <img src="/media/default.png" class="postImg">
+              <img src="https://micro-static.s3.amazonaws.com/media/default.png" class="postImg">
             {% endif %}
           </div>
           <a href="{{post.user.username}}" class="card-title white-text col m6 center-align">{{post.user.username}}</a>
