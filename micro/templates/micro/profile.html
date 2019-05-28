@@ -3,7 +3,7 @@
 {% block content %}
   <div class="row">
     <div class="col l4 m8 offset-m2 s12 center-align">
-      <h3>{{username}}</h3><br>
+      <h3>{{request.user.display_name}}</h3><br>
 
       {% if user.userprofile.profile_image %}
         <img src="{{user.userprofile.profile_image.url}}" class="profileImg"><br>
@@ -27,7 +27,7 @@
           {% endif %}
         {% endfor %}
       {% else %}
-        <h3>{{username}}'s posts</h3><br>
+        <h3>{{user.display_name}}'s posts</h3><br>
         {% for post in posts %}
           {% if post.user == user %}
             {% include 'micro/includes/feed.html' %}

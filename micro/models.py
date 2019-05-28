@@ -6,7 +6,16 @@ import os
 
 # Create your models here.
 class User(AbstractUser):
-    pass
+    display_name = models.CharField(max_length=50, default=1, blank=False, null=False)
+
+    def __str__(self):
+        return (f"{self.username}")
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.display_name = self.username
+            self.username = self.username.lower()
+        super(self.__class__, self).save(*args, **kwargs)
 
 
 class Post(models.Model):

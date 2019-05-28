@@ -38,7 +38,7 @@ def register(request):
             UserProfile.objects.create(user=user)
             username = form.cleaned_data.get('username')
             login(request, user)
-            messages.success(request, f"New account created: {username}")
+            messages.success(request, f"New account created: {user.display_name}")
             return redirect('micro:homepage')
         else:
             for msg in form.errors:
@@ -71,12 +71,12 @@ def login_request(request):
     if request.method == "POST":
         form = CustomAuthForm(request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username').lower()
+            username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"You are now logged in as {username}")
+                messages.info(request, f"You are now logged in as {user.display_name}")
                 return redirect(f'/{user.username}')
             else:
                 messages.error(request, "Invalid username or password")
@@ -104,7 +104,7 @@ def profile(request, username):
             user = User.objects.get(username=username)
             follows = [follows for follows in request.user.userprofile.follows.all()]
             posts = Post.objects.order_by('-published')
-            return render(request, 'micro/profile.html', {"follows":follows, "username":username, "user":user, "posts":posts, "form":form, "form2":form2})
+            return render(request, 'micro/profile.html', {"follows":follows, "user":user, "posts":posts, "form":form, "form2":form2})
         else:
             messages.error(request, "User does not exist")
             return redirect('micro:homepage')
