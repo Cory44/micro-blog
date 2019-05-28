@@ -3,14 +3,14 @@
 {% block content %}
   <div class="row">
     <div class="col l4 m8 offset-m2 s12 center-align">
-      <h3>{{request.user.display_name}}</h3><br>
+      <h3>{{user.display_name}}</h3><br>
 
       {% if user.userprofile.profile_image %}
         <img src="{{user.userprofile.profile_image.url}}" class="profileImg"><br>
       {% elif username == request.user.username  %}
         {% include 'micro/includes/image_form.html' %} 
       {% else %}
-        <img src="/media/default.png" class="profileImg">
+        <img src="https://micro-static.s3.amazonaws.com/media/default.png" class="profileImg">
       {% endif %}
 
       {% if username == request.user.username %}
