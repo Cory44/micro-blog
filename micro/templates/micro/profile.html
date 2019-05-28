@@ -7,13 +7,13 @@
 
       {% if user.userprofile.profile_image %}
         <img src="{{user.userprofile.profile_image.url}}" class="profileImg"><br>
-      {% elif username == request.user.username  %}
+      {% elif user.username == request.user.username  %}
         {% include 'micro/includes/image_form.html' %} 
       {% else %}
         <img src="https://micro-static.s3.amazonaws.com/media/default.png" class="profileImg">
       {% endif %}
 
-      {% if username == request.user.username %}
+      {% if user.username == request.user.username %}
         {% include 'micro/includes/post-form.html' %}
       {% endif %}
     </div>
