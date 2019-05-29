@@ -29,3 +29,7 @@ p input:focus {
   height: 100px;
   border-radius: 50%;
 }
+
+.pinned {
+  border: 1px solid black;
+}

@@ -3,9 +3,9 @@
     <div class="card green lighten-3">
       <div class="card-content white-text">
         <div class="row">
-            <a href="{{user.username}}" class="card-title white-text col m12 center-align">{{user.display_name}}</a>
+            <a href="/{{user.username}}" class="card-title white-text col s12 center-align">{{user.display_name}}</a>
 
-          <div class="col m12 center-align">
+          <div class="col s12 center-align">
             {% if user.userprofile.profile_image %}
               <img src="{{user.userprofile.profile_image.url}}" class="discoverImg">
             {% else %}

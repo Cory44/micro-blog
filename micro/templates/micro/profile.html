@@ -1,6 +1,15 @@
 {% extends 'micro/header.html' %}
 
 {% block content %}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var options = { top:450, offset:75 };
+      var elems = document.querySelectorAll('.pushpin');
+      var instances = M.Pushpin.init(elems, options);
+    });
+  </script>
+
   <div class="row">
     <div class="col l4 m8 offset-m2 s12 center-align">
       <h3>{{user.display_name}}</h3><br>
@@ -12,11 +21,13 @@
       {% else %}
         <img src="https://micro-static.s3.amazonaws.com/media/default.png" class="profileImg">
       {% endif %}
+      
+        {% if user.username == request.user.username %}
+          {% include 'micro/includes/post-form.html' %}
+        {% endif %}
 
-      {% if user.username == request.user.username %}
-        {% include 'micro/includes/post-form.html' %}
-      {% endif %}
     </div>
+
     <div class="col l7 offset-l1 m8 offset-m2 s12 center-align">
 
       {% if user == request.user %}
@@ -35,7 +46,7 @@
         {% endfor %}
       {% endif %}
 
-
     </div>
   </div>
+
 {% endblock %}
